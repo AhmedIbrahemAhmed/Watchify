@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavBlank } from '../../Components/nav-blank/nav-blank';
-import { RouterOutlet } from '../../../../node_modules/@angular/router/types/_router_module-chunk';
 import { Footer } from '../../Components/footer/footer';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-blank',
