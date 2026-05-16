@@ -2,3 +2,9 @@
 .toast-top-right {
   z-index: 999999 !important;
 }
+
+body {
+  background-color: #121414;
+  font-family: 'Inter', 'Signika', 'Sora';
+  color: #e2e2e2;
+}
