@@ -1,9 +1,80 @@
-import { Component } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, inject, signal } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { Toaster } from '../../Core/Services/toaster';
+import { Authentication } from '../../Core/Services/authentication';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-sign-in',
-  imports: [],
+  imports: [NgClass, ReactiveFormsModule, RouterLink],
   templateUrl: './sign-in.html',
   styleUrl: './sign-in.css',
 })
-export class SignIn {}
+export class SignIn {
+  response = inject(Authentication);
+  router = inject(Router);
+  toaster = inject(Toaster);
+  showPassword = signal<boolean>(false);
+  msgError = signal<string>('');
+  isloading = signal<boolean>(false);
+
+  togglePassword() {
+    this.showPassword.set(!this.showPassword());
+  }
+
+  FormLogin = new FormGroup({
+    password: new FormControl('', [Validators.required, Validators.pattern('^\\w{6,}$')]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+  });
+
+  // Sign In with Google
+  loginGoogle() {
+    this.response
+      .loginWithGoogle()
+      .then(async (result) => {
+        console.log('Google User:', result.user);
+
+        const token = await result.user.getIdToken();
+        localStorage.setItem('Token', token);
+        // Decode Token
+        this.response.SaveUserData();
+        this.router.navigate(['/Home']);
+        this.toaster.success('Sign In  Successfully  🎉', 'Success');
+      })
+      .catch((error) => {
+        console.log('Google Login Error:', error);
+      });
+  }
+
+  Login() {
+    if (this.FormLogin.valid) {
+      this.isloading.set(true);
+      this.response.SignIn(this.FormLogin.value).subscribe({
+        next: (res) => {
+          this.isloading.set(false);
+
+          //Set Token in Localstorage
+          localStorage.setItem('Token', res['token']);
+
+          // Decode Token
+          this.response.SaveUserData();
+          this.toaster.success('You are Log In  Successfully  🎉', 'Success');
+          this.router.navigate(['/Home']);
+          console.log(res);
+        },
+        error: (err: HttpErrorResponse) => {
+          this.msgError.set(err?.['error']?.['message']);
+          this.isloading.set(false);
+          this.toaster.warning('Login Fail Try Again Later  🎉');
+          console.log(err);
+        },
+        complete: () => {
+          console.log('Api successfully respond');
+        },
+      });
+      console.log(this.FormLogin.value);
+    }
+  }
+}

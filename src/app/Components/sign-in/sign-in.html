@@ -4,29 +4,107 @@
       <h2>Welcome Back</h2>
       <p>Dive back into the world of premium cinema.</p>
 
-      <label>Email Address</label>
-      <input type="email" placeholder="name@example.com" />
+      @if (msgError()) {
+        <p class="alert alert-danger m-0 w-100 text-center">{{ msgError() }}</p>
+      }
+      <form [formGroup]="FormLogin" (submit)="Login()">
+        <label>Email Address</label>
+        <input
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': FormLogin.get('email')?.errors && FormLogin.get('email')?.touched,
+            'is-valid': FormLogin.get('email')?.touched && !FormLogin.get('email')?.errors,
+          }"
+          formControlName="email"
+          type="email"
+          placeholder="name@example.com"
+        />
+        @if (FormLogin.get('email')?.touched && FormLogin.get('email')?.errors?.['required']) {
+          <small class="text-danger fs-6"> Email is required </small>
+        } @else if (FormLogin.get('email')?.dirty && FormLogin.get('email')?.errors?.['email']) {
+          <small class="text-danger fs-6"> Please enter a valid email like ahmed@gmail.com </small>
+        }
 
-      <div class="password-header">
-        <label>Password</label>
-        <a href="#">Forgot password?</a>
-      </div>
+        <div class="password-header">
+          <label>Password</label>
+          <a routerLink="/forgetpassword">Forgot password?</a>
+        </div>
 
-      <div class="password-box">
-        <input type="password" placeholder="••••••••" />
-        <span class="eye">👁</span>
-      </div>
+        <div class="password-box">
+          <input
+            class="form-control"
+            [ngClass]="{
+              'is-invalid': FormLogin.get('password')?.errors && FormLogin.get('password')?.touched,
+              'is-valid': FormLogin.get('password')?.touched && !FormLogin.get('password')?.errors,
+            }"
+            formControlName="password"
+            [type]="showPassword() ? 'text' : 'password'"
+            placeholder="Enter your password"
+          />
+          <span class="eye" (click)="togglePassword()">
+            <i class="fas" [ngClass]="showPassword() ? 'fa-eye-slash' : 'fa-eye'"></i>
+          </span>
+        </div>
 
-      <button class="primary">Sign In</button>
+        @if (
+          FormLogin.get('password')?.touched && FormLogin.get('password')?.errors?.['required']
+        ) {
+          <small class="text-danger fs-6"> Password is required </small>
+        } @else if (
+          FormLogin.get('password')?.dirty && FormLogin.get('password')?.errors?.['pattern']
+        ) {
+          <small class="text-danger fs-6">
+            Password must contain at least 6 characters, including uppercase, lowercase, number, and
+            underscore
+          </small>
+        }
+
+        <!-- Button -->
+        <button [disabled]="FormLogin.invalid || isloading()" type="submit" class="primary">
+          Login
+          @if (isloading()) {
+            <span><i class="fas fa-spin fa-spinner"></i></span>
+          }
+        </button>
+      </form>
 
       <div class="divider">
         <span>OR</span>
       </div>
 
-      <button class="google">Continue with Google</button>
+      <button
+        (click)="loginGoogle()"
+        type="button"
+        class="btn btn-outline-dark text-light border w-100 d-flex align-items-center justify-content-center gap-2 py-2 google-btn shadow-sm"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 48 48"
+          class="me-1"
+        >
+          <path
+            fill="#EA4335"
+            d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"
+          />
+          <path
+            fill="#4285F4"
+            d="M46.5 24c0-1.55-.15-3.24-.47-4.77H24v9.03h12.75c-.55 2.97-2.22 5.5-4.78 7.23l7.42 5.75C43.75 36.88 46.5 31.08 46.5 24z"
+          />
+          <path
+            fill="#FBBC05"
+            d="M10.54 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.98-6.19z"
+          />
+          <path
+            fill="#34A853"
+            d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.42-5.75c-2.11 1.42-4.81 2.31-8.47 2.31-6.26 0-11.57-4.22-13.46-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"
+          />
+        </svg>
+        <span class="fw-medium">Continue with Google</span>
+      </button>
 
-      <p class="switch">New to CINESTREAM? <span>Create an account</span></p>
+      <p class="switch" routerLink="/sign-up">New to CINESTREAM? <span>Create an account</span></p>
     </div>
-    -
   </div>
 </div>
