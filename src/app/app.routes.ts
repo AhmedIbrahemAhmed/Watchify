@@ -7,6 +7,8 @@ import { Home } from './Components/home/home';
 import { NotFound } from './Components/not-found/not-found';
 import { authneticatedGuard } from './Core/guards/authneticated-guard';
 import { ForgetPassword } from './Components/forget-password/forget-password';
+import { MoviesGallery } from './Components/movies-gallery/movies-gallery';
+import { TvGallery } from './Components/tv-gallery/tv-gallery';
 
 export const routes: Routes = [
   // Auth routes
@@ -48,6 +50,14 @@ export const routes: Routes = [
       {
         path: 'Home',
         component: Home,
+      },
+      {
+        path: 'Movies',
+        component: MoviesGallery,
+      },
+      {
+        path: 'TvShows',
+        component: TvGallery,
       },
     ],
   },

@@ -1,0 +1,45 @@
+.watchify-pagination {
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.watchify-pagination .page-item {
+  margin: 0;
+}
+
+.watchify-pagination .page-link {
+  width: 46px;
+  height: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none !important;
+  box-shadow: none !important;
+
+  border-radius: 14px !important;
+
+  background: #181d2b;
+
+  color: white;
+
+  font-weight: 600;
+
+  transition: 0.3s;
+}
+
+.watchify-pagination .page-link:hover {
+  background: #2a3350;
+  color: white;
+}
+
+.watchify-pagination .active .page-link {
+  background: #9acbff;
+  color: #0c1220;
+}
+
+.watchify-pagination .disabled .page-link {
+  opacity: 0.4;
+  pointer-events: none;
+}
