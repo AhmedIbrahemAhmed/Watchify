@@ -1,10 +1,12 @@
-import { Routes } from '@angular/router';
+import { Routes, CanActivateFn } from '@angular/router';
 import { Auth } from './Layouts/auth/auth';
 import { SignUp } from './Components/sign-up/sign-up';
 import { SignIn } from './Components/sign-in/sign-in';
 import { Blank } from './Layouts/blank/blank';
 import { Home } from './Components/home/home';
 import { NotFound } from './Components/not-found/not-found';
+import { authneticatedGuard } from './Core/guards/authneticated-guard';
+import { ForgetPassword } from './Components/forget-password/forget-password';
 
 export const routes: Routes = [
   // Auth routes
@@ -25,6 +27,10 @@ export const routes: Routes = [
         path: 'sign-in',
         component: SignIn,
       },
+      {
+        path: 'forgetpassword',
+        component: ForgetPassword,
+      },
     ],
   },
 
@@ -32,6 +38,7 @@ export const routes: Routes = [
   {
     path: '',
     component: Blank,
+    canActivate: [authneticatedGuard],
     children: [
       {
         path: '',
