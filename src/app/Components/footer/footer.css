@@ -1,0 +1,45 @@
+.footer-section {
+  background-color: #05080d;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  font-weight: 300;
+  font-size: small;
+}
+
+.logo {
+  color: #9acbff;
+  font-weight: 700;
+}
+
+.footer-text {
+  color: #d0d6e0;
+  line-height: 1.8;
+  font-size: 20px;
+}
+
+.copyright {
+  color: #d0d6e0;
+  font-weight: 500;
+}
+
+.footer-links li {
+  margin-bottom: 16px;
+  color: #d0d6e0;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.footer-links li:hover {
+  color: white;
+}
+
+.social-icons i {
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  color: #d0d6e0;
+}
+
+.social-icons i:hover {
+  color: white;
+  transform: translateY(-4px);
+}

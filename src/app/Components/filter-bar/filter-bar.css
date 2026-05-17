@@ -1,0 +1,75 @@
+/* FILTER CONTAINER */
+.watchify-filter-bar {
+  background: linear-gradient(90deg, #3f5f82 0%, #51759c 50%, #9acbff 100%);
+
+  border-radius: 24px;
+
+  padding: 28px;
+
+  backdrop-filter: blur(12px);
+}
+
+/* LABEL */
+.filter-label {
+  font-size: 12px;
+  margin-left: 10px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  display: block;
+  color: #ced6f5;
+}
+
+/* INPUTS */
+.watchify-input,
+.watchify-select {
+  background: #1a1f2e;
+  border: 1px solid transparent;
+  color: white;
+  height: 54px;
+  border-radius: 16px;
+  padding-left: 42px;
+  transition: 0.3s;
+}
+
+.watchify-select {
+  padding-left: 16px;
+}
+
+.watchify-input:focus,
+.watchify-select:focus {
+  background: #1a1f2e;
+  border-color: #9acbff;
+  box-shadow: 0 0 0 0.15rem rgba(76, 125, 255, 0.25);
+  color: white;
+}
+
+/* PLACEHOLDER */
+.watchify-input::placeholder {
+  color: #7f879f;
+}
+
+/* SEARCH ICON */
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #8d95ae;
+  z-index: 10;
+}
+
+/* BUTTON */
+.watchify-btn {
+  height: 54px;
+  border-radius: 16px;
+  background: #1f2942;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-weight: 600;
+}
+
+.watchify-btn:hover {
+  background: #394970;
+  color: white;
+}

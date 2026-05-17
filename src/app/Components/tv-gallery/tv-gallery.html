@@ -1,0 +1,17 @@
+<app-filter-bar (filtersChanged)="onFiltersTvChanged($event)" [mediaType]="mediaType">
+</app-filter-bar>
+
+<div class="row g-4 p-5">
+  @for (tv of tvShows; track tv.id) {
+    <div class="col-md-2 col-sm-6">
+      <app-media-card [media]="tv" mediaType="tv"></app-media-card>
+    </div>
+  }
+</div>
+<app-pagination
+  [currentPage]="currentPage"
+  [totalPages]="totalPages"
+  [totalPagesArray]="totalPagesArray"
+  (pageChanged)="loadTVShows($event)"
+>
+</app-pagination>

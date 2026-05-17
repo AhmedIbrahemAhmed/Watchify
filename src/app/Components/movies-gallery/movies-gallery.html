@@ -1,0 +1,17 @@
+<app-filter-bar (filtersChanged)="onFiltersMoviesChanged($event)" [mediaType]="mediaType">
+</app-filter-bar>
+<!-- MOVIES -->
+<div class="row g-4 p-5">
+  @for (movie of movies; track movie.id) {
+    <div class="col-md-2 col-sm-6">
+      <app-media-card [media]="movie" mediaType="movie"></app-media-card>
+    </div>
+  }
+</div>
+<app-pagination
+  [currentPage]="currentPage"
+  [totalPages]="totalPages"
+  [totalPagesArray]="totalPagesArray"
+  (pageChanged)="loadMovies($event)"
+>
+</app-pagination>
