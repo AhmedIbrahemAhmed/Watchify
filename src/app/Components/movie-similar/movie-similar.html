@@ -6,7 +6,7 @@
     @for (item of movies; track item.id) {
       <div class="col flex-shrink-0">
         <div class="card bg-dark border-0 rounded-4 overflow-hidden h-100 movie-card shadow-lg" 
-             [routerLink]="['/watchify/movies', item.id]">
+             [routerLink]="['/', type, item.id]">
           
           <div class="position-relative aspect-poster">
             <img [src]="item.posterUrl" class="w-100 h-100 object-fit-cover" [alt]="item.title">

@@ -6,8 +6,10 @@ import { Movie } from '../../Core/Interfaces/movie-model';
 import { MovieReviews } from "../movie-reviews/movie-reviews";
 import { MovieTrailer } from "../movie-trailer/movie-trailer";
 import { MovieSimilar } from "../movie-similar/movie-similar";
-import { MovieService } from '../../Core/Services/movieService';
 import { VideoPlayer } from "../video-player/video-player";
+import { TmdbService } from '../../Core/Services/tmdb-service';
+import { Authentication } from '../../Core/Services/authentication';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-movie-detail',
@@ -21,24 +23,38 @@ export class MovieDetail {
   isUserSubscribed = true;
   private route = inject(ActivatedRoute);
   private router = inject(Router);
-  private movieService = inject(MovieService);
-  currentMovie!: Movie;
-  // constructor(private authService: AuthService, private router: Router) {
+  private movieService = inject(TmdbService);
+  private cdr = inject(ChangeDetectorRef);
+  selectedSeasonIndex = 0;
+  selectedEpisodeIndex = 0;
+  currentMovie: Movie | null = null;
+  // constructor(private authService: Authentication, private router: Router) {
   //   // Check subscription status from your service
   //   this.isUserSubscribed = this.authService.getUserSubscriptionStatus();
   // }
   ngOnInit() {
   // Use the observable paramMap to handle navigation to similar movies
+    console.log("MovieDetail INIT");
     this.route.paramMap.subscribe(params => {
+      console.log("PARAMMAP TRIGGERED");
+      const id = params.get('id');
+      console.log("ID:", id);
       this.fetchMovieDetails(params.get('id'));
     });
-}
+  }
+  get selectedSeason() {
+    return this.currentMovie?.seasons?.[this.selectedSeasonIndex];
+  }
 
+  get selectedEpisode() {
+    return this.selectedSeason?.episodes?.[this.selectedEpisodeIndex];
+  }
   fetchMovieDetails(id: string | null) {
+    console.log("FETCH CALLED", id);
     const mediaId = id || '1';
     // 1. Get the mediaType from route data ('movie' or 'tv')
     const type = this.route.snapshot.data['mediaType'] as 'movie' | 'tv';
-
+    console.log("TYPE:", type);
     // 2. Set Static Data immediately for testing/instant loading
     this.currentMovie = {
       id: mediaId,
@@ -64,29 +80,106 @@ export class MovieDetail {
       streamUrl: 'https://www.youtube.com/embed/Aq5WXmQQooo',
       isSeries: type === 'tv',
       currentEpisodeIndex: type === 'tv' ? 0 : undefined,
-      episodes: type === 'tv' ? [
-        { id: 'e1', title: 'The Erasure', streamUrl: 'https://www.youtube.com/embed/Aq5WXmQQooo', order: 1 },
-        { id: 'e2', title: 'Fragmented', streamUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ', order: 2 }
-      ] : []
+      seasons: type === 'tv' ? [
+        {
+          seasonNumber: 1,
+          episode_count: 2,
+          episodes: [
+            { id: 's1e1', title: 'Episode 1: Awakening', streamUrl: 'https://www.youtube.com/embed/Aq5WXmQQooo', order: 1 },
+            { id: 's1e2', title: 'Episode 2: Descent', streamUrl: 'https://www.youtube.com/embed/Aq5WXmQQooo', order: 2 }
+          ]
+        },
+        {
+          seasonNumber: 2,
+          episode_count: 2,
+
+          episodes: [
+            { id: 's2e1', title: 'Episode 1: Resurgence', streamUrl: 'https://www.youtube.com/embed/Aq5WXmQQooo', order: 1 },
+            { id: 's2e2', title: 'Episode 2: Eclipse', streamUrl: 'https://www.youtube.com/embed/Aq5WXmQQooo', order: 2 }
+          ]
+        }
+      ] : undefined
     };
 
     // 3. Call the TMDB Service (Overwrites static data when API responds)
     this.movieService.getMediaDetails(mediaId, type).subscribe({
       next: (data) => {
+         console.log("API SUCCESS:", data);
         // Preserve your streamUrl/episodes if TMDB doesn't provide them
-        this.currentMovie = { 
-          ...data, 
-          streamUrl: this.currentMovie.streamUrl,
-          episodes: data.isSeries ? this.currentMovie.episodes : [] 
+        this.currentMovie = {
+          ...data,
+          streamUrl: this.currentMovie?.streamUrl || '',
         };
+        this.cdr.markForCheck(); // Ensure view updates with new data
         window.scrollTo({ top: 0, behavior: 'smooth' });
       },
       error: (err) => {
         console.warn('API Error, keeping static test data:', err);
-        // We don't clear currentMovie here so the static data stays visible
+        if (err.status === 404) {
+          const fallbackType = type === 'movie' ? 'tv' : 'movie';
+
+          this.movieService.getMediaDetails(mediaId, fallbackType).subscribe({
+            next: (data) => {
+              console.log("FALLBACK SUCCESS:", data);
+
+              this.currentMovie = {
+                ...data,
+                streamUrl: this.currentMovie?.streamUrl || '',
+              };
+
+              this.cdr.markForCheck();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            },
+
+            error: (fallbackErr) => {
+              console.error('Fallback also failed:', fallbackErr);
+            }
+          });
+
+          return;
+        }
       }
     });
   }
+
+  changeEpisode(direction: number) {
+    const season = this.selectedSeason;
+    if (!season?.episodes?.length) return;
+
+    const newIndex = this.selectedEpisodeIndex + direction;
+
+    if (newIndex >= 0 && newIndex < season.episodes.length) {
+      this.selectedEpisodeIndex = newIndex;
+      this.currentMovie!.streamUrl = season.episodes[newIndex].streamUrl;
+    }
+  }
+  changeSeason(index: number) {
+    this.selectedSeasonIndex = index;
+    this.selectedEpisodeIndex = 0;
+
+    const season = this.selectedSeason;
+
+    if (season?.episodes?.length) return;
+
+    this.movieService
+      .getMediaSeasonDetails(
+        this.currentMovie!.id,
+        season!.seasonNumber
+      )
+      .subscribe(res => {
+
+        season!.episodes =
+          res.episodes.map((e:any)=>({
+            id:e.id.toString(),
+            title:e.name,
+            order:e.episode_number,
+            streamUrl:this.currentMovie!.streamUrl
+          }));
+
+        this.cdr.markForCheck();
+      });
+  }
+
   handleWatchNow() {
     if (this.isUserSubscribed) {
       this.showPlayer = true;

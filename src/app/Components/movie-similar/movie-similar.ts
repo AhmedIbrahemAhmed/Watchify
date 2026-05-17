@@ -9,4 +9,5 @@ import { RouterModule } from '@angular/router';
 })
 export class MovieSimilar {
   @Input() movies: SimilarMovie[] = [];
+  @Input() type: 'Movies' | 'TvShows' = 'Movies';
 }
