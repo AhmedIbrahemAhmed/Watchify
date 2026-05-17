@@ -6,9 +6,12 @@
       "rePassword": "Aly123",
       "password": "Aly123",
       "email": "Aly@gmail.com",
-      "IsSubscribe": false,
-      "SubscriptionEndDate": null,
-      "id": "2fAq3D8mC9k"
+      "IsSubscribe": true,
+      "SubscriptionEndDate": "2027-05-17T23:47:14.534Z",
+      "id": "2fAq3D8mC9k",
+      "WatchHistory": [],
+      "WatchLater": [],
+      "Favourites": []
     },
     {
       "name": "Aly Ahmed",
@@ -18,7 +21,10 @@
       "email": "Aly@gmail.com",
       "IsSubscribe": false,
       "SubscriptionEndDate": null,
-      "id": "d41OFQzPIjI"
+      "id": "d41OFQzPIjI",
+      "WatchHistory": [],
+      "WatchLater": [],
+      "Favourites": []
     },
     {
       "name": "Aly Ahmed",
@@ -28,7 +34,10 @@
       "email": "Aly@gmail.com",
       "IsSubscribe": false,
       "SubscriptionEndDate": null,
-      "id": "SM6FuBJT740"
+      "id": "SM6FuBJT740",
+      "WatchHistory": [],
+      "WatchLater": [],
+      "Favourites": []
     },
     {
       "name": "Aly Ahmed",
@@ -38,7 +47,10 @@
       "email": "Aly@gmail.com",
       "IsSubscribe": false,
       "SubscriptionEndDate": null,
-      "id": "mSLSOcjsI5o"
+      "id": "mSLSOcjsI5o",
+      "WatchHistory": [],
+      "WatchLater": [],
+      "Favourites": []
     },
     {
       "name": "Mohammed",
@@ -48,17 +60,33 @@
       "email": "Mohammed@gmail.com",
       "IsSubscribe": false,
       "SubscriptionEndDate": null,
-      "id": "5LNKo8GbxDU"
+      "id": "5LNKo8GbxDU",
+      "WatchHistory": [],
+      "WatchLater": [],
+      "Favourites": []
     },
     {
       "email": "ahmedfaragfekry@gmail.com",
       "id": "ltDIq7uvl6I",
       "IsSubscribe": false,
-      "SubscriptionEndDate": null
+      "SubscriptionEndDate": null,
+      "WatchHistory": [],
+      "WatchLater": [],
+      "Favourites": []
+    },
+    {
+      "WatchHistory": [],
+      "WatchLater": [],
+      "Favourites": [],
+      "IsSubscribe": true,
+      "SubscriptionEndDate": "2026-06-17T23:50:25.382Z",
+      "name": "Mohamed Ali Fadl",
+      "phone": "01112223334",
+      "rePassword": "MedoAli123",
+      "password": "MedoAli123",
+      "email": "mali@gmail.com",
+      "id": "p4n93vtesq"
     }
   ],
-  "WatchHistory": [],
-  "WatchLater": [],
-  "Favourites": [],
   "$schema": "./node_modules/json-server/schema.json"
 }
