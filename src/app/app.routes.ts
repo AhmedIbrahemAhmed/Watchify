@@ -5,8 +5,27 @@ import { SignIn } from './Components/sign-in/sign-in';
 import { Blank } from './Layouts/blank/blank';
 import { Home } from './Components/home/home';
 import { NotFound } from './Components/not-found/not-found';
+import { MovieDetail } from './Components/movie-detail/movie-detail';
 
 export const routes: Routes = [
+   // Blank route
+  {
+    path: 'watchify',
+    component: Blank,
+    children: [
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full',
+      },
+      {
+        path: 'home',
+        component: Home,
+      },
+      { path: 'movies/:id', component: MovieDetail, data: { mediaType: 'movie' } },
+      { path: 'tv-show/:id', component: MovieDetail, data: { mediaType: 'tv' } },
+    ],
+  },
   // Auth routes
   {
     path: '',
@@ -28,22 +47,7 @@ export const routes: Routes = [
     ],
   },
 
-  // Blank route
-  {
-    path: '',
-    component: Blank,
-    children: [
-      {
-        path: '',
-        redirectTo: 'Home',
-        pathMatch: 'full',
-      },
-      {
-        path: 'Home',
-        component: Home,
-      },
-    ],
-  },
+ 
 
   // Wildcard route for 404 page
   {

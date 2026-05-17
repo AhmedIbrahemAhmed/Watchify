@@ -1,0 +1,28 @@
+<div class="bg-black min-vh-100">
+  @if (currentMovie) {
+    <app-movie-hero [movie]="currentMovie" (watchRequested)="handleWatchNow()"></app-movie-hero>
+    @if (showPlayer) {
+      <div id="player" class="container-fluid px-md-5 mt-4 animate-fade-in">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="text-primary mb-0 font-monospace">NOW STREAMING</h4>
+          <button class="btn btn-sm btn-outline-secondary" (click)="showPlayer = false">Close Player</button>
+        </div>
+        <app-video-player [url]="currentMovie.streamUrl || ''"></app-video-player>
+      </div>
+    }
+    <div class="position-relative" style="margin-top: -80px; z-index: 10;">
+      <app-movie-info [movie]="currentMovie"></app-movie-info>
+    </div>
+
+    <app-movie-trailer [url]="currentMovie.trailerUrl"></app-movie-trailer>
+    <app-movie-similar [movies]="currentMovie.similarMovies"></app-movie-similar>
+    <app-movie-reviews [reviews]="currentMovie.reviews"></app-movie-reviews>
+    
+  } @else {
+    <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  }
+</div>
