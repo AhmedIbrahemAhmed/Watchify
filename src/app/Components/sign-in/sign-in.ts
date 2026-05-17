@@ -51,29 +51,44 @@ export class SignIn {
   Login() {
     if (this.FormLogin.valid) {
       this.isloading.set(true);
-      this.response.SignIn(this.FormLogin.value).subscribe({
+
+      this.response.SignIn().subscribe({
         next: (res) => {
-          this.isloading.set(false);
+          const user = res.find(
+            (r) =>
+              r.email === this.FormLogin.get('email')?.value &&
+              r.password === this.FormLogin.get('password')?.value,
+          );
 
-          //Set Token in Localstorage
-          localStorage.setItem('Token', res['token']);
+          if (user) {
+            this.isloading.set(false);
+            this.router.navigate(['/Home']);
+            localStorage.setItem('Id', user.id!);
+            localStorage.setItem('email', user.email!);
 
-          // Decode Token
-          this.response.SaveUserData();
-          this.toaster.success('You are Log In  Successfully  🎉', 'Success');
-          this.router.navigate(['/Home']);
+            this.toaster.success('You are Log In Successfully 🎉', 'Success');
+          } else {
+            this.isloading.set(false);
+
+            this.msgError.set('Email or Password is incorrect');
+          }
+
           console.log(res);
         },
+
         error: (err: HttpErrorResponse) => {
-          this.msgError.set(err?.['error']?.['message']);
           this.isloading.set(false);
-          this.toaster.warning('Login Fail Try Again Later  🎉');
+
+          this.toaster.warning('Login Fail Try Again Later 🎉');
+
           console.log(err);
         },
+
         complete: () => {
           console.log('Api successfully respond');
         },
       });
+
       console.log(this.FormLogin.value);
     }
   }
