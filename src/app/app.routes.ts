@@ -12,7 +12,6 @@ import { TvGallery } from './Components/tv-gallery/tv-gallery';
 import { MovieDetail } from './Components/movie-detail/movie-detail';
 
 export const routes: Routes = [
-  
   // Auth routes
   {
     path: '',
@@ -38,7 +37,7 @@ export const routes: Routes = [
     ],
   },
 
-// Blank route
+  // Blank route
   {
     path: '',
     component: Blank,
@@ -63,7 +62,6 @@ export const routes: Routes = [
         path: 'TvShows',
         component: TvGallery,
       },
-      
     ],
   },
 

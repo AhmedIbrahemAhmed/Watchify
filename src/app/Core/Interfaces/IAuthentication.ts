@@ -1,12 +1,15 @@
 export interface IUserSignUp {
+  id: string | null | undefined;
   name: string | null | undefined;
   password: string | null | undefined;
   rePassword: string | null | undefined;
   phone: string | null | undefined;
   email: string | null | undefined;
+  IsSubscribe: boolean | null | undefined;
+  SubscriptionEndDate: Date | undefined | null;
 }
 
-export interface IUserSignIn extends Pick<IUserSignUp, 'email' | 'password'> {}
+// export interface IUserSignIn extends Pick<IUserSignUp, 'email' | 'password'> {}
 export interface IForgetPassword {
   email: string | null | undefined;
 }
@@ -28,3 +31,4 @@ export interface IDecodedToken {
 }
 
 export const BaseUrl: string = 'https://ecommerce.routemisr.com';
+export const JsonBaseUrl: string = 'http://localhost:3000';

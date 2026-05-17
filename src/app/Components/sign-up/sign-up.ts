@@ -23,9 +23,14 @@ export class SignUp {
   response = inject(Authentication);
   router = inject(Router);
   toaster = inject(Toaster);
+  showPassword1 = signal<boolean>(false);
   showPassword = signal<boolean>(false);
-  msgError = signal<string>('');
+  msgError = signal<string | null>(null);
   isloading = signal<boolean>(false);
+
+  togglePassword1() {
+    this.showPassword1.set(!this.showPassword1());
+  }
 
   togglePassword() {
     this.showPassword.set(!this.showPassword());
@@ -57,24 +62,50 @@ export class SignUp {
   FormSubmit() {
     if (this.Form.valid) {
       this.isloading.set(true);
-      this.response.SignUp(this.Form.value).subscribe({
-        next: (res) => {
-          this.isloading.set(false);
-          this.toaster.success('Sign Up  Successfully  🎉', 'Success');
-          this.router.navigate(['/sign-in']);
-          console.log(res);
+
+      this.response.SignIn().subscribe({
+        next: (users) => {
+          const isExist = users.find((u) => u.email === this.Form.get('email')?.value);
+
+          if (isExist) {
+            this.msgError.set('Email is already exist');
+            this.isloading.set(false);
+            return;
+          }
+
+          const modelpost = {
+            ...this.Form.value,
+            IsSubscribe: false,
+            SubscriptionEndDate: null,
+          };
+
+          this.response.SignUp(modelpost).subscribe({
+            next: (res) => {
+              this.msgError.set(null);
+
+              this.toaster.success('Sign Up Successfully 🎉', 'Success');
+
+              this.router.navigate(['/sign-in']);
+
+              this.isloading.set(false);
+            },
+
+            error: (err: HttpErrorResponse) => {
+              this.toaster.warning('Sign Up Fail Try Again Later');
+
+              this.isloading.set(false);
+
+              console.log(err);
+            },
+          });
         },
-        error: (err: HttpErrorResponse) => {
-          this.msgError.set(err?.['error']?.['message']);
-          this.toaster.warning('Sign Up  Fail Try Again Later  🎉');
+
+        error: (err) => {
           this.isloading.set(false);
+
           console.log(err);
         },
-        complete: () => {
-          console.log('Api successfully respond');
-        },
       });
-      console.log(this.Form.value);
     }
   }
 }

@@ -3,9 +3,9 @@ import {
   IDecodedToken,
   IForgetPassword,
   IResetPassword,
-  IUserSignIn,
   IUserSignUp,
   IVerifyResetCode,
+  JsonBaseUrl,
 } from '../Interfaces/IAuthentication';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
@@ -23,12 +23,12 @@ export class Authentication {
   private readonly request = inject(HttpClient);
 
 
-  SignUp(data: Partial<IUserSignUp>) {
-    return this.request.post(`${BaseUrl}/api/v1/auth/signup`, data);
+  SignUp(data: Partial<IUserSignUp>): Observable<any> {
+    return this.request.post(`${JsonBaseUrl}/Users`, data);
   }
 
-  SignIn(data: Partial<IUserSignIn>): Observable<any> {
-    return this.request.post(`${BaseUrl}/api/v1/auth/signin`, data);
+  SignIn(): Observable<IUserSignUp[]> {
+    return this.request.get<IUserSignUp[]>(`${JsonBaseUrl}/Users`);
   }
 
   SaveUserData() {
