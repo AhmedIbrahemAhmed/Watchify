@@ -37,11 +37,33 @@ export class SignIn {
         console.log('Google User:', result.user);
 
         const token = await result.user.getIdToken();
-        localStorage.setItem('Token', token);
+        localStorage.setItem('Id', result.user.uid);
+        localStorage.setItem('email', result.user.email!);
         // Decode Token
         this.response.SaveUserData();
+
         this.router.navigate(['/Home']);
         this.toaster.success('Sign In  Successfully  🎉', 'Success');
+
+        this.response
+          .SignUp({
+            email: result.user.email,
+            id: result.user.uid,
+            IsSubscribe: false,
+            SubscriptionEndDate: null,
+          })
+          .subscribe({
+            next: (res) => {
+              console.log(res);
+            },
+            error: (err: HttpErrorResponse) => {
+              console.log(err);
+            },
+
+            complete: () => {
+              console.log('Api successfully respond');
+            },
+          });
       })
       .catch((error) => {
         console.log('Google Login Error:', error);
