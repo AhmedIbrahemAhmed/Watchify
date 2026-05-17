@@ -9,8 +9,10 @@ import { authneticatedGuard } from './Core/guards/authneticated-guard';
 import { ForgetPassword } from './Components/forget-password/forget-password';
 import { MoviesGallery } from './Components/movies-gallery/movies-gallery';
 import { TvGallery } from './Components/tv-gallery/tv-gallery';
+import { MovieDetail } from './Components/movie-detail/movie-detail';
 
 export const routes: Routes = [
+  
   // Auth routes
   {
     path: '',
@@ -36,7 +38,7 @@ export const routes: Routes = [
     ],
   },
 
-  // Blank route
+// Blank route
   {
     path: '',
     component: Blank,
@@ -51,6 +53,8 @@ export const routes: Routes = [
         path: 'Home',
         component: Home,
       },
+      { path: 'Movies/:id', component: MovieDetail, data: { mediaType: 'movie' } },
+      { path: 'TvShows/:id', component: MovieDetail, data: { mediaType: 'tv' } },
       {
         path: 'Movies',
         component: MoviesGallery,
@@ -59,6 +63,7 @@ export const routes: Routes = [
         path: 'TvShows',
         component: TvGallery,
       },
+      
     ],
   },
 

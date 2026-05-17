@@ -1,0 +1,33 @@
+<div class="container-fluid px-md-5 mt-n5 position-relative z-3">
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="card bg-dark text-white border-secondary p-4 rounded-4 shadow-lg backdrop-blur">
+            <h3 class="mb-4">The Cast</h3>
+            <div class="row row-cols-2 row-cols-md-4 g-4">
+                <div class="col text-center">
+                    @for (actor of movie.cast; track actor.name){
+                        <div class="rounded-circle overflow-hidden mb-2 mx-auto border border-2 border-transparent actor-img">
+                            <img [src]="actor.imageUrl" class="w-100 h-100 object-fit-cover" [alt]="actor.name">
+                        </div>
+                        <h6 class="mb-0 text-truncate">{{actor.name}}</h6>
+                        <small class="text-secondary">{{actor.role}}</small>
+                    }       
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card bg-dark text-white border-secondary p-4 rounded-4 shadow-lg backdrop-blur">
+        <h4 class="mb-4">Production</h4>
+        <div class="vstack gap-3">
+            <div class="d-flex justify-content-between border-bottom border-secondary pb-2">
+            <span class="text-secondary">Director</span><span>{{movie.director}}</span>
+            </div>
+            <div class="d-flex justify-content-between border-bottom border-secondary pb-2">
+            <span class="text-secondary">Studio</span><span>{{movie.studio}}</span>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
