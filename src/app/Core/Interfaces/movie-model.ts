@@ -20,6 +20,12 @@ export interface SimilarMovie {
   posterUrl: string;
   genres: string[];
 }
+
+export interface Season {
+  seasonNumber: number;
+  episodes: Episode[];
+  episode_count?: any; // For TMDB response mapping, as it doesn't provide episode details in the season list endpoint
+}
 export interface Episode {
   id: string;
   title: string;
@@ -46,6 +52,6 @@ export interface Movie {
   similarMovies: SimilarMovie[];
   streamUrl?: string;
   isSeries?: boolean;
-  episodes?: Episode[];
+  seasons?: Season[];
   currentEpisodeIndex?: number;
 }

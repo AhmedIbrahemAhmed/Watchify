@@ -1,21 +1,122 @@
 <div class="bg-black min-vh-100">
   @if (currentMovie) {
     <app-movie-hero [movie]="currentMovie" (watchRequested)="handleWatchNow()"></app-movie-hero>
+    
     @if (showPlayer) {
       <div id="player" class="container-fluid px-md-5 mt-4 animate-fade-in">
+
         <div class="d-flex justify-content-between align-items-center mb-3">
-          <h4 class="text-primary mb-0 font-monospace">NOW STREAMING</h4>
-          <button class="btn btn-sm btn-outline-secondary" (click)="showPlayer = false">Close Player</button>
+          <div>
+            <h4 class="text-primary mb-0 font-monospace">
+
+              @if (currentMovie.isSeries) {
+                NOW STREAMING:
+                SEASON {{ selectedSeasonIndex + 1 }}
+                EPISODE {{ selectedEpisodeIndex + 1 }}
+              } @else {
+                NOW STREAMING
+              }
+
+            </h4>
+
+            @if (currentMovie.isSeries && currentMovie.seasons?.[selectedSeasonIndex]?.episode_count > 0) {
+              <small class="text-secondary d-block mt-1">
+                {{ selectedEpisode?.title }}
+              </small>
+            }
+          </div>
+
+          <button class="btn btn-sm btn-outline-secondary" (click)="showPlayer = false">
+            Close Player
+          </button>
         </div>
+
         <app-video-player [url]="currentMovie.streamUrl || ''"></app-video-player>
+
+        <!-- SEASONS -->
+        @if (currentMovie.isSeries && currentMovie.seasons?.length) {
+          <div class="mb-3 d-flex gap-2 flex-wrap mt-3">
+
+            @for (season of currentMovie.seasons; track season.seasonNumber; let i = $index) {
+              <button
+                class="btn btn-sm"
+                [class.btn-primary]="i === selectedSeasonIndex"
+                [class.btn-outline-secondary]="i !== selectedSeasonIndex"
+                (click)="changeSeason(i)">
+                Season {{ season.seasonNumber }}
+              </button>
+            }
+
+          </div>
+        }
+
+        <!-- EPISODES -->
+        <!-- EPISODE LIST -->
+        @if (selectedSeason?.episodes?.length) {
+
+          <div class="mt-4">
+            <h6 class="text-light mb-3">
+              Episodes ({{ selectedSeason?.episode_count }})
+            </h6>
+
+            <div class="d-flex gap-2 flex-wrap">
+
+              @for (episode of selectedSeason?.episodes; track episode.id; let i = $index) {
+
+                <button
+                  class="btn btn-sm"
+                  [class.btn-primary]="i === selectedEpisodeIndex"
+                  [class.btn-outline-secondary]="i !== selectedEpisodeIndex"
+
+                  (click)="selectedEpisodeIndex = i;
+                            currentMovie!.streamUrl = episode.streamUrl">
+
+                  E{{ episode.order }}
+                  @if (episode.title) {
+                    - {{ episode.title }}
+                  }
+
+                </button>
+
+              }
+
+            </div>
+          </div>
+
+          <!-- PREV / NEXT -->
+          <div class="d-flex justify-content-center gap-3 mt-4">
+
+            <button
+              class="btn btn-dark border-secondary px-4 py-2"
+              [disabled]="selectedEpisodeIndex === 0"
+              (click)="changeEpisode(-1)">
+
+              <i class="bi bi-chevron-left me-2"></i>
+              Previous Episode
+            </button>
+
+            <button
+              class="btn btn-dark border-secondary px-4 py-2"
+              [disabled]="selectedEpisodeIndex >= selectedSeason!.episodes.length - 1"
+              (click)="changeEpisode(1)">
+
+              Next Episode
+              <i class="bi bi-chevron-right ms-2"></i>
+
+            </button>
+
+          </div>
+        }
+
       </div>
     }
+
     <div class="position-relative" style="margin-top: -80px; z-index: 10;">
       <app-movie-info [movie]="currentMovie"></app-movie-info>
     </div>
 
     <app-movie-trailer [url]="currentMovie.trailerUrl"></app-movie-trailer>
-    <app-movie-similar [movies]="currentMovie.similarMovies"></app-movie-similar>
+    <app-movie-similar [movies]="currentMovie.similarMovies" [type]="currentMovie.isSeries ? 'TvShows' : 'Movies'"></app-movie-similar>
     <app-movie-reviews [reviews]="currentMovie.reviews"></app-movie-reviews>
     
   } @else {
