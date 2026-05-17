@@ -1,0 +1,27 @@
+.not-found {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #9acbff;
+  text-align: center;
+}
+
+.not-found h1 {
+  font-size: 100px;
+  font-weight: bold;
+}
+
+.not-found h2 {
+  margin-top: -10px;
+}
+
+.btn-home {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: linear-gradient(90deg, #51759c, #9acbff);
+  color: #000;
+  border-radius: 10px;
+  text-decoration: none;
+}

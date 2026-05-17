@@ -1,0 +1,27 @@
+<section class="container-fluid bg-dark-custom text-light py-5 px-4">
+  <div class="container-fluid px-lg-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="section-title">Trending Now</h2>
+
+      <div class="d-flex gap-2">
+        <button class="slider-btn slider-left" (click)="scrollLeft()">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+
+        <button class="slider-btn slider-right" (click)="scrollRight()">
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="slider-wrapper">
+      <div #scrollContainer class="movies-slider d-flex gap-4 pb-3">
+        @for ( media of all; track media.id) {
+          <div style="width: 300px" class="flex-shrink-0">
+            <app-media-card [media]="media"></app-media-card>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

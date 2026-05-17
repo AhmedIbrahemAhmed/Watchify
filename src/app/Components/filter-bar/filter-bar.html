@@ -1,0 +1,73 @@
+<!-- FILTER BAR -->
+<div class="container-fluid px-5 mt-3">
+  <div class="watchify-filter-bar">
+    <div class="row g-3 align-items-end">
+      <!-- Search -->
+      <div class="col-lg-3 col-md-8">
+        <label class="filter-label">SEARCH BY KEYWORD</label>
+
+        <div class="position-relative">
+          <i class="bi bi-search search-icon"></i>
+
+          <input
+            type="text"
+            [(ngModel)]="search"
+            class="form-control watchify-input"
+            placeholder="Search titles, actors..."
+          />
+        </div>
+      </div>
+
+      <!-- Genre -->
+      <div class="col-lg-2 col-md-6 filter-item">
+        <label class="filter-label">GENRE</label>
+
+        <div class="select-wrapper">
+          <select [(ngModel)]="genre" class="form-select watchify-select">
+            @for (genre of genres; track genre.id) {
+              <option [value]="genre.id">
+                {{ genre.name }}
+              </option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <!-- Year -->
+      <div class="col-lg-2 col-md-6">
+        <label class="filter-label">YEAR</label>
+
+        <select class="form-select watchify-select" [(ngModel)]="year">
+          @for (y of years; track y.value) {
+            <option [value]="y.value">
+              {{ y.label }}
+            </option>
+          }
+        </select>
+      </div>
+
+      <!-- Rating -->
+      <div class="col-lg-2 col-md-6">
+        <label class="filter-label">RATING</label>
+
+        <select class="form-select watchify-select" [(ngModel)]="rating">
+          @for (r of ratings; track r.value) {
+            <option [value]="r.value">
+              {{ r.label }}
+            </option>
+          }
+        </select>
+      </div>
+
+      <!-- Buttons -->
+      <div class="col-lg-3">
+        <div class="d-flex justify-content-end" (click)="applyFilters()">
+          <button class="btn watchify-btn">
+            <i class="bi bi-sliders"></i>
+            Apply Filters
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

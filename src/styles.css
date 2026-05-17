@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+.toast-top-right {
+  z-index: 999999 !important;
+}
+
+body {
+  background-color: #121414;
+  font-family: 'Inter', 'Signika', 'Sora';
+  color: #e2e2e2;
+}

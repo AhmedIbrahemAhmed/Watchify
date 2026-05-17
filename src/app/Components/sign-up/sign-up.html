@@ -4,10 +4,23 @@
       <h2>Create Account</h2>
       <p>Join the world of premium cinema.</p>
 
+      @if (msgError()) {
+        <p class="alert alert-danger text-light m-0 w-100 text-center fs-4">{{ msgError() }}</p>
+      }
+
       <form [formGroup]="Form" (submit)="FormSubmit()">
         <!-- Full Name -->
         <label>Full Name</label>
-        <input formControlName="name" type="text" placeholder="Enter your FullName" />
+        <input
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': Form.get('name')?.errors && Form.get('name')?.touched,
+            'is-valid': Form.get('name')?.touched && !Form.get('name')?.errors,
+          }"
+          formControlName="name"
+          type="text"
+          placeholder="Enter your FullName"
+        />
         @if (Form.get('name')?.touched && Form.get('name')?.errors?.['required']) {
           <small class="text-danger fs-6">Name is Required</small>
         } @else if (Form.get('name')?.dirty && Form.get('name')?.errors?.['minlength']) {
@@ -16,21 +29,37 @@
 
         <!-- Email -->
         <label>Email Address</label>
-        <input formControlName="email" type="email" placeholder="name@example.com" />
+        <input
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': Form.get('email')?.errors && Form.get('email')?.touched,
+            'is-valid': Form.get('email')?.touched && !Form.get('email')?.errors,
+          }"
+          formControlName="email"
+          type="email"
+          placeholder="name@example.com"
+        />
         @if (Form.get('email')?.touched && Form.get('email')?.errors?.['required']) {
           <small class="text-danger fs-6"> Email is required </small>
-
         } @else if (Form.get('email')?.dirty && Form.get('email')?.errors?.['email']) {
           <small class="text-danger fs-6"> Please enter a valid email like ahmed@gmail.com </small>
         }
 
         <!-- Phone -->
         <label>Phone Number</label>
-        <input formControlName="phone" type="tel" placeholder="Enter Phone Number" />
+        <input
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': Form.get('phone')?.errors && Form.get('phone')?.touched,
+            'is-valid': Form.get('phone')?.touched && !Form.get('phone')?.errors,
+          }"
+          formControlName="phone"
+          type="tel"
+          placeholder="Enter Phone Number"
+        />
 
         @if (Form.get('phone')?.touched && Form.get('phone')?.errors?.['required']) {
           <small class="text-danger fs-6"> Phone number is required </small>
-
         } @else if (Form.get('phone')?.dirty && Form.get('phone')?.errors?.['pattern']) {
           <small class="text-danger fs-6">
             Please enter a valid phone number like 01012345678
@@ -43,17 +72,27 @@
         </div>
 
         <div class="password-box">
-          <input formControlName="password" type="password" placeholder="Enter your password" />
-          <span class="eye">👁</span>
+          <input
+            class="form-control"
+            [ngClass]="{
+              'is-invalid': Form.get('password')?.errors && Form.get('password')?.touched,
+              'is-valid': Form.get('password')?.touched && !Form.get('password')?.errors,
+            }"
+            formControlName="password"
+            [type]="showPassword() ? 'text' : 'password'"
+            placeholder="Enter your password"
+          />
+           <span class="eye" (click)="togglePassword()">
+            <i class="fas" [ngClass]="showPassword() ? 'fa-eye-slash' : 'fa-eye'"></i>
+          </span>
         </div>
 
         @if (Form.get('password')?.touched && Form.get('password')?.errors?.['required']) {
           <small class="text-danger fs-6"> Password is required </small>
-
         } @else if (Form.get('password')?.dirty && Form.get('password')?.errors?.['pattern']) {
           <small class="text-danger fs-6">
             Password must contain at least 6 characters, including uppercase, lowercase, number, and
-            special character
+            underscore
           </small>
         }
         <!-- Confirm Password -->
@@ -63,18 +102,30 @@
 
         <div class="password-box">
           <input
-            type="rePassword"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid': Form.errors?.['nomatch'] && Form.get('rePassword')?.touched,
+              'is-valid': !Form.errors?.['nomatch'] && Form.get('rePassword')?.touched,
+            }"
+            [type]="showPassword() ? 'text' : 'password'"
             formControlName="rePassword"
             placeholder="Confirm your password"
           />
-          <span class="eye">👁</span>
+          <span class="eye" (click)="togglePassword()">
+            <i class="fas" [ngClass]="showPassword() ? 'fa-eye-slash' : 'fa-eye'"></i>
+          </span>
         </div>
 
         @if (Form.get('rePassword')?.dirty && Form.errors?.['nomatch']) {
           <small class="text-danger fs-6"> rePassword must be same characters of password </small>
         }
         <!-- Button -->
-        <input [disabled]="Form.invalid" type="submit" value="Sign Up" class="primary" />
+        <button [disabled]="Form.invalid || isloading()" type="submit" class="primary">
+          Sign Up
+          @if (isloading()) {
+            <span><i class="fas fa-spin fa-spinner"></i></span>
+          }
+        </button>
       </form>
 
       <!-- OR -->
@@ -82,10 +133,7 @@
         <span>OR</span>
       </div>
 
-      <!-- Google -->
-      <button class="google">Continue with Google</button>
-
-      <p class="switch">Already have an account? <span>Sign in</span></p>
+      <p class="switch" routerLink="/sign-in">Already have an account? <span>Sign in</span></p>
     </div>
   </div>
 </div>

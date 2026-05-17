@@ -1,0 +1,30 @@
+
+<!-- PAGINATION -->
+<div class="d-flex justify-content-center mt-5">
+  <nav>
+    <ul class="pagination watchify-pagination">
+      <!-- PREV -->
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <button class="page-link" (click)="previousPage()">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+      </li>
+
+      <!-- PAGE NUMBERS -->
+      @for (page of totalPagesArray; track page) {
+        <li class="page-item" [class.active]="currentPage === page">
+          <button class="page-link" (click)="goToPage(page)">
+            {{ page }}
+          </button>
+        </li>
+      }
+
+      <!-- NEXT -->
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <button class="page-link" (click)="nextPage()">
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </li>
+    </ul>
+  </nav>
+</div>
