@@ -29,6 +29,12 @@ export class HeroBanner {
 
 
   }
+  goToDetails() {
+    // Navigate to the details page based on media type and ID
+    const id = this.featured.id;
+    const route = this.featured.media_type === 'movie' ? `/Movies/${id}` : `/TvShows/${id}`;
+    window.location.href = route; // Simple navigation, consider using Angular Router for better performance
+  }
 
 
 
