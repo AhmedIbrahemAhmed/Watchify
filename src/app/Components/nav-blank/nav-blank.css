@@ -65,3 +65,34 @@
   height: 100%;
   object-fit: cover;
 }
+<<<<<<< payment
+
+.profile-link {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.profile-link:hover {
+  transform: scale(1.05);
+}
+
+.logout-btn {
+  background: transparent;
+  border: 1px solid rgba(154, 203, 255, 0.4);
+  color: #9acbff;
+  padding: 0.4rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.logout-btn:hover {
+  background: rgba(154, 203, 255, 0.15);
+  color: #fff;
+}
+=======
+>>>>>>> main

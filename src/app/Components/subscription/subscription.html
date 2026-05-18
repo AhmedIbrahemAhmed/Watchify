@@ -1,0 +1,56 @@
+<section class="subscription-page">
+  <div class="subscription-header">
+    <h1>Choose Your Plan</h1>
+    <p>Unlock unlimited streaming with Watchify Premium</p>
+  </div>
+
+  <div class="plans-grid">
+    <article class="plan-card">
+      <h2>Monthly</h2>
+      <p class="price">
+        <span class="currency">$</span><span class="amount">5</span
+        ><span class="period">/month</span>
+      </p>
+      <ul class="features">
+        <li>Unlimited movies &amp; TV shows</li>
+        <li>HD streaming</li>
+        <li>Cancel anytime</li>
+      </ul>
+      <button
+        class="btn-plan"
+        type="button"
+        (click)="handleSubscribe('month')"
+        [disabled]="loading"
+      >
+        <span *ngIf="!loading">Subscribe Now</span>
+        <span *ngIf="loading">Processing...</span>
+      </button>
+    </article>
+
+    <article class="plan-card featured">
+      <span class="badge">Best Value</span>
+      <h2>Yearly</h2>
+      <p class="price">
+        <span class="currency">$</span><span class="amount">50</span
+        ><span class="period">/year</span>
+      </p>
+      <ul class="features">
+        <li>Everything in Monthly</li>
+        <li>Save 17% per year</li>
+        <li>Priority support</li>
+      </ul>
+      <button
+        class="btn-plan btn-plan-accent"
+        type="button"
+        (click)="handleSubscribe('year')"
+        [disabled]="loading"
+      >
+        <span *ngIf="!loading">Subscribe Now</span>
+        <span *ngIf="loading">Processing...</span>
+      </button>
+    </article>
+  </div>
+
+  <p *ngIf="error" class="error-msg" role="alert">{{ error }}</p>
+  <p class="secure-note">Secure payments powered by Stripe</p>
+</section>

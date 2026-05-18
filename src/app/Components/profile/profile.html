@@ -1,0 +1,44 @@
+<section class="profile-page">
+  <div *ngIf="loading()" class="profile-card loading-state">
+    <p>Loading profile...</p>
+  </div>
+
+  <div *ngIf="!loading() && user()" class="profile-card">
+    <h1>My Profile</h1>
+
+    <div class="profile-field">
+      <span class="label">Name</span>
+      <span class="value">{{ user()?.name || '—' }}</span>
+    </div>
+    <div class="profile-field">
+      <span class="label">Email</span>
+      <span class="value">{{ user()?.email || '—' }}</span>
+    </div>
+    <div class="profile-field" *ngIf="user()?.phone">
+      <span class="label">Phone</span>
+      <span class="value">{{ user()?.phone }}</span>
+    </div>
+
+    <div class="subscription-block">
+      <h2>Subscription</h2>
+      <ng-container *ngIf="hasActiveSubscription(); else notSubscribed">
+        <p class="sub-active">Active until {{ user()?.SubscriptionEndDate | date: 'mediumDate' }}</p>
+        <button
+          type="button"
+          class="btn-cancel"
+          (click)="cancelSubscription()"
+          [disabled]="cancelling()"
+        >
+          {{ cancelling() ? 'Cancelling...' : 'Cancel Subscription' }}
+        </button>
+      </ng-container>
+      <ng-template #notSubscribed>
+        <p class="sub-inactive">You do not have an active subscription.</p>
+      </ng-template>
+    </div>
+
+    <p *ngIf="message()" class="profile-message">{{ message() }}</p>
+
+    <button type="button" class="btn-logout" (click)="logout()">Log Out</button>
+  </div>
+</section>
