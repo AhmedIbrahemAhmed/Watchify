@@ -2,36 +2,6 @@
   "Users": [
     {
       "name": "Aly Ahmed",
-      "phone": "01228380204",
-      "rePassword": "Aly123",
-      "password": "Aly123",
-      "email": "Aly@gmail.com",
-      "IsSubscribe": false,
-      "SubscriptionEndDate": null,
-      "id": "2fAq3D8mC9k"
-    },
-    {
-      "name": "Aly Ahmed",
-      "phone": "01501795004",
-      "rePassword": "Aly123",
-      "password": "Aly123",
-      "email": "Aly@gmail.com",
-      "IsSubscribe": false,
-      "SubscriptionEndDate": null,
-      "id": "d41OFQzPIjI"
-    },
-    {
-      "name": "Aly Ahmed",
-      "phone": "01501795004",
-      "rePassword": "Aly123",
-      "password": "Aly123",
-      "email": "Aly@gmail.com",
-      "IsSubscribe": false,
-      "SubscriptionEndDate": null,
-      "id": "SM6FuBJT740"
-    },
-    {
-      "name": "Aly Ahmed",
       "phone": "01501795004",
       "rePassword": "aaaa44",
       "password": "aaaa44",
@@ -40,16 +10,7 @@
       "SubscriptionEndDate": null,
       "id": "mSLSOcjsI5o"
     },
-    {
-      "name": "Mohammed",
-      "phone": "01501795004",
-      "rePassword": "Mohammed123",
-      "password": "Mohammed123",
-      "email": "Mohammed@gmail.com",
-      "IsSubscribe": false,
-      "SubscriptionEndDate": null,
-      "id": "5LNKo8GbxDU"
-    },
+
     {
       "email": "ahmedfaragfekry@gmail.com",
       "id": "ltDIq7uvl6I",

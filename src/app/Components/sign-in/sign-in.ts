@@ -33,38 +33,50 @@ export class SignIn {
   loginGoogle() {
     this.response
       .loginWithGoogle()
+
       .then(async (result) => {
         console.log('Google User:', result.user);
 
-        const token = await result.user.getIdToken();
-        localStorage.setItem('Id', result.user.uid);
         localStorage.setItem('email', result.user.email!);
-        // Decode Token
-        this.response.SaveUserData();
 
-        this.router.navigate(['/Home']);
-        this.toaster.success('Sign In  Successfully  🎉', 'Success');
+        // Check User Exists
+        this.response.SignIn().subscribe({
+          next: (users) => {
+            const isExist = users.find((u) => u.email === result.user.email);
 
-        this.response
-          .SignUp({
-            email: result.user.email,
-            id: result.user.uid,
-            IsSubscribe: false,
-            SubscriptionEndDate: null,
-          })
-          .subscribe({
-            next: (res) => {
-              console.log(res);
-            },
-            error: (err: HttpErrorResponse) => {
-              console.log(err);
-            },
+            if (!isExist) {
+              this.response
+                .SignUp({
+                  email: result.user.email,
 
-            complete: () => {
-              console.log('Api successfully respond');
-            },
-          });
+                  id: result.user.uid,
+
+                  IsSubscribe: false,
+
+                  SubscriptionEndDate: null,
+                })
+
+                .subscribe({
+                  next: (res) => {
+                    localStorage.setItem('Id', result.user.uid);
+                    console.log('User Added', res);
+                  },
+
+                  error: (err: HttpErrorResponse) => {
+                    console.log(err);
+                  },
+                });
+            }
+
+            localStorage.setItem('Id', isExist?.id!);
+            // Navigate
+            this.router.navigate(['/Home']);
+
+            this.toaster.success('Sign In Successfully 🎉', 'Success');
+          },
+        });
       })
+
       .catch((error) => {
         console.log('Google Login Error:', error);
       });
