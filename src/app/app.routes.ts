@@ -58,10 +58,7 @@ export const routes: Routes = [
         path: 'Movies',
         component: MoviesGallery,
       },
-      {
-        
-
-      },
+      
       {
         path: 'TvShows',
         component: TvGallery,
