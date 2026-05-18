@@ -31,13 +31,17 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['MyList']" [routerLinkActive]="['active']">My List</a>
         </li>
-        <li class="nav-item" *ngIf="showSubscribeLink()">
-          <a
+
+        <li class="nav-item" >
+          @if (showSubscribeLink()){
+             <a
             class="nav-link"
             [routerLink]="['subscription']"
             [routerLinkActive]="['active']"
             >Subscribe</a
           >
+          }
+         
         </li>
       </ul>
 
