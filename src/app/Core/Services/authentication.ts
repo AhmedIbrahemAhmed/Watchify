@@ -22,7 +22,6 @@ export class Authentication {
   UserData = signal<IDecodedToken | null>(null);
   private readonly request = inject(HttpClient);
 
-
   SignUp(data: Partial<IUserSignUp>): Observable<any> {
     return this.request.post(`${JsonBaseUrl}/Users`, data);
   }
@@ -35,6 +34,17 @@ export class Authentication {
     if (localStorage.getItem('Token') != null) {
       this.UserData.set(jwtDecode(localStorage.getItem('Token')!));
     }
+  }
+
+  getUserById(id: string): Observable<IUserSignUp> {
+    return this.request.get<IUserSignUp>(`${JsonBaseUrl}/Users/${id}`);
+  }
+
+  logout(): void {
+    localStorage.removeItem('Id');
+    localStorage.removeItem('email');
+    localStorage.removeItem('Token');
+    this.UserData.set(null);
   }
 
   VerifyEmail(data: Partial<IForgetPassword>): Observable<any> {

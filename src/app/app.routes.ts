@@ -59,6 +59,10 @@ export const routes: Routes = [
         component: MoviesGallery,
       },
       {
+        
+
+      },
+      {
         path: 'TvShows',
         component: TvGallery,
       },
