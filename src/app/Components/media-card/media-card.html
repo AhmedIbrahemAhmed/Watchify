@@ -16,26 +16,44 @@
     <!-- Overlay -->
 
     <div class="movie-overlay">
-      <div class="d-flex flex-column align-items-center gap-3">
-        <!-- Play -->
+      <!-- Play -->
 
+      <div class="d-flex flex-column align-items-center gap-3">
         <button class="play-btn" (click)="goToDetails()">
           <i class="bi bi-play-fill"></i>
         </button>
+        @if (mode == 'browse') {
+          <div>
+            <!-- Favorite -->
+            <button class="action-btn me-2" (click)="addToFavourites()">
+              <i class="bi bi-heart"></i>
+            </button>
 
-        <div>
-          <!-- Favorite -->
+            <!-- My List -->
+            <button class="action-btn" (click)="addToWatchLater()">
+              <i class="bi bi-plus-lg"></i>
+            </button>
+          </div>
+        }
 
-          <button class="action-btn me-2">
-            <i class="bi bi-heart"></i>
+        @if (mode == 'favourite') {
+          <button
+            class="btn btn-danger d-flex align-items-center gap-2 px-3 py-2"
+            (click)="removeFromFavourites()"
+          >
+            <i class="bi bi-trash"></i>
+            Remove
           </button>
-
-          <!-- My List -->
-
-          <button class="action-btn">
-            <i class="bi bi-plus-lg"></i>
+        }
+        @if (mode == 'watchlist') {
+          <button
+            class="btn btn-danger d-flex align-items-center gap-2 px-3 py-2"
+            (click)="removeFromWatchLater()"
+          >
+            <i class="bi bi-trash"></i>
+            Remove
           </button>
-        </div>
+        }
       </div>
     </div>
   </div>

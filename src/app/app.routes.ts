@@ -10,6 +10,8 @@ import { ForgetPassword } from './Components/forget-password/forget-password';
 import { MoviesGallery } from './Components/movies-gallery/movies-gallery';
 import { TvGallery } from './Components/tv-gallery/tv-gallery';
 import { MovieDetail } from './Components/movie-detail/movie-detail';
+import { WatchLater } from './Components/watch-later/watch-later';
+import { MyList } from './Components/my-list/my-list';
 
 export const routes: Routes = [
   // Auth routes
@@ -58,10 +60,14 @@ export const routes: Routes = [
         path: 'Movies',
         component: MoviesGallery,
       },
-      
+
       {
         path: 'TvShows',
         component: TvGallery,
+      },
+      {
+        path: 'MyList',
+        component: MyList,
       },
       {
         title: 'Subscription',

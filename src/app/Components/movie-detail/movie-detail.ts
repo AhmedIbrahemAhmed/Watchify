@@ -42,7 +42,7 @@ export class MovieDetail {
     }
   }
   ngOnInit() {
-  // Use the observable paramMap to handle navigation to similar movies
+    // Use the observable paramMap to handle navigation to similar movies
     console.log("MovieDetail INIT");
     this.route.paramMap.subscribe(params => {
       console.log("PARAMMAP TRIGGERED");
@@ -113,7 +113,7 @@ export class MovieDetail {
     // 3. Call the TMDB Service (Overwrites static data when API responds)
     this.movieService.getMediaDetails(mediaId, type).subscribe({
       next: (data) => {
-         console.log("API SUCCESS:", data);
+        console.log("API SUCCESS:", data);
         // Preserve your streamUrl/episodes if TMDB doesn't provide them
         this.currentMovie = {
           ...data,
@@ -178,11 +178,11 @@ export class MovieDetail {
       .subscribe(res => {
 
         season!.episodes =
-          res.episodes.map((e:any)=>({
-            id:e.id.toString(),
-            title:e.name,
-            order:e.episode_number,
-            streamUrl:this.currentMovie!.streamUrl
+          res.episodes.map((e: any) => ({
+            id: e.id.toString(),
+            title: e.name,
+            order: e.episode_number,
+            streamUrl: this.currentMovie!.streamUrl
           }));
 
         this.cdr.markForCheck();
@@ -198,7 +198,7 @@ export class MovieDetail {
       }, 100);
     } else {
       // If not subscribed, redirect to pricing or show a modal
-      alert('Subscription Required! Redirecting to plans...');
+      //alert('Subscription Required! Redirecting to plans...');
       this.router.navigate(['/subscription']);
     }
   }

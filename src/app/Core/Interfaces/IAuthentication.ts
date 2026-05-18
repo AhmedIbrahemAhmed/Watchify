@@ -7,6 +7,9 @@ export interface IUserSignUp {
   email: string | null | undefined;
   IsSubscribe: boolean | null | undefined;
   SubscriptionEndDate: Date | undefined | null;
+  WatchHistory: [];
+  WatchLater: [];
+  Favourites: [];
 }
 
 // export interface IUserSignIn extends Pick<IUserSignUp, 'email' | 'password'> {}
@@ -31,4 +34,4 @@ export interface IDecodedToken {
 }
 
 export const BaseUrl: string = 'https://ecommerce.routemisr.com';
-export const JsonBaseUrl: string = 'http://localhost:3000';
+export const JsonBaseUrl: string = 'http://localhost:3001';

@@ -16,9 +16,9 @@
 
     <div class="slider-wrapper">
       <div #scrollContainer class="movies-slider d-flex gap-4 pb-3">
-        @for ( media of all; track media.id) {
+        @for (media of all; track media.id) {
           <div style="width: 300px" class="flex-shrink-0">
-            <app-media-card [media]="media"></app-media-card>
+            <app-media-card [media]="media" [mediaType]="media.media_type"></app-media-card>
           </div>
         }
       </div>

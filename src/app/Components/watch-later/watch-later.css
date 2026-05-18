@@ -1,0 +1,58 @@
+.bg-dark-custom {
+  background-color: #121414;
+  position: relative;
+}
+
+.section-title {
+  font-size: 42px;
+  font-weight: 600;
+  color: white;
+}
+
+/* SLIDER */
+
+.slider-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.movies-slider {
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.movies-slider::-webkit-scrollbar {
+  display: none;
+}
+
+/* BUTTONS */
+
+.slider-btn {
+  width: 52px;
+  height: 52px;
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  transition: 0.3s;
+}
+.slider-left {
+  left: 10px;
+  top: 47%;
+}
+.slider-right {
+  right: 10px;
+  top: 47%;
+}
+
+.slider-btn:hover {
+  background: #9acbff;
+  color: #121414;
+  transform: scale(1.08);
+}
+
+.slider-btn i {
+  font-size: 22px;
+}
