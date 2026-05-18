@@ -20,7 +20,7 @@
 
     <p class="hero-text mb-4">{{ featured?.overview }}</p>
     <div class="d-flex gap-3">
-      <button class="btn bg px-4 py-3 fw-bold">
+      <button class="btn bg px-4 py-3 fw-bold" (click)="goToDetails()">
         <i class="bi bi-play-fill" (click)="goToDetails()"></i>
         Play Now
       </button>
