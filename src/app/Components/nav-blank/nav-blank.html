@@ -31,6 +31,14 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['MyList']" [routerLinkActive]="['active']">My List</a>
         </li>
+        <li class="nav-item" *ngIf="showSubscribeLink()">
+          <a
+            class="nav-link"
+            [routerLink]="['subscription']"
+            [routerLinkActive]="['active']"
+            >Subscribe</a
+          >
+        </li>
       </ul>
 
       <!-- Right Side (inside collapse so it behaves correctly) -->
@@ -39,7 +47,7 @@
         <!-- <a href="#" class="text-white fs-5">
           <i class="bi bi-search"></i>
         </a> -->
-        <div class="d-none d-md-block">
+        <a class="profile-link" [routerLink]="['profile']" routerLinkActive="active" title="Profile">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="45"
@@ -61,7 +69,8 @@
               fill="#9acbff"
             />
           </svg>
-        </div>
+        </a>
+        <button type="button" class="logout-btn" (click)="logout()" title="Log out">Log out</button>
       </div>
     </div>
   </div>
