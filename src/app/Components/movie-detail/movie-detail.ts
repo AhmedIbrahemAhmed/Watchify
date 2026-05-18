@@ -19,8 +19,7 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 export class MovieDetail {
   showPlayer = false;
-  // true for now - in a real app, this would come from an AuthService or similar
-  isUserSubscribed = true;
+  isUserSubscribed = false;
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private movieService = inject(TmdbService);
@@ -28,10 +27,20 @@ export class MovieDetail {
   selectedSeasonIndex = 0;
   selectedEpisodeIndex = 0;
   currentMovie: Movie | null = null;
-  // constructor(private authService: Authentication, private router: Router) {
-  //   // Check subscription status from your service
-  //   this.isUserSubscribed = this.authService.getUserSubscriptionStatus();
-  // }
+  constructor(private authService: Authentication) {
+    // Check subscription status from your service
+    var userId = localStorage.getItem('Id');
+    if (userId) {
+      this.authService.getUserById(userId).subscribe({
+        next: (user) => {
+          this.isUserSubscribed = (user.IsSubscribe ?? false) && (user.SubscriptionEndDate != null && new Date(user.SubscriptionEndDate) > new Date());
+        },
+        error: () => {
+          this.isUserSubscribed = false;
+        },
+      });
+    }
+  }
   ngOnInit() {
   // Use the observable paramMap to handle navigation to similar movies
     console.log("MovieDetail INIT");
@@ -190,7 +199,7 @@ export class MovieDetail {
     } else {
       // If not subscribed, redirect to pricing or show a modal
       alert('Subscription Required! Redirecting to plans...');
-      this.router.navigate(['/watchify/pricing']);
+      this.router.navigate(['/subscription']);
     }
   }
 }
