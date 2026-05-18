@@ -66,9 +66,26 @@ export const routes: Routes = [
         path: 'TvShows',
         component: TvGallery,
       },
+      {
+        title: 'Subscription',
+        path: 'subscription',
+        loadComponent: () =>
+          import('./Components/subscription/subscription').then((m) => m.SubscriptionComponent),
+      },
+      {
+        title: 'Profile',
+        path: 'profile',
+        loadComponent: () =>
+          import('./Components/profile/profile').then((m) => m.ProfileComponent),
+      },
     ],
   },
-
+  {
+    title: 'Success',
+    path: 'success',
+    canActivate: [authneticatedGuard],
+    loadComponent: () => import('./Components/success/success').then((m) => m.SuccessComponent),
+  },
   // Wildcard route for 404 page
   {
     path: '**',
