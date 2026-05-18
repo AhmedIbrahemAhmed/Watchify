@@ -1,3 +1,4 @@
+<<<<<<< payment
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { NgIf } from '@angular/common';
@@ -54,3 +55,15 @@ export class NavBlank implements OnInit {
     return new Date(user.SubscriptionEndDate) > new Date();
   }
 }
+=======
+import { Component } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+
+@Component({
+  selector: 'app-nav-blank',
+  imports: [RouterLink, RouterLinkActive],
+  templateUrl: './nav-blank.html',
+  styleUrl: './nav-blank.css',
+})
+export class NavBlank { }
+>>>>>>> main

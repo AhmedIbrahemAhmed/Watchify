@@ -65,6 +65,7 @@
   height: 100%;
   object-fit: cover;
 }
+<<<<<<< payment
 
 .profile-link {
   display: flex;
@@ -93,3 +94,5 @@
   background: rgba(154, 203, 255, 0.15);
   color: #fff;
 }
+=======
+>>>>>>> main

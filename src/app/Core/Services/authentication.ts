@@ -49,17 +49,6 @@ export class Authentication {
     return this.request.put(`${BaseUrl}/api/v1/auth/resetPassword`, data);
   }
 
-  getUserById(id: string): Observable<IUserSignUp> {
-    return this.request.get<IUserSignUp>(`${JsonBaseUrl}/Users/${id}`);
-  }
-
-  logout(): void {
-    localStorage.removeItem('Id');
-    localStorage.removeItem('email');
-    localStorage.removeItem('Token');
-    this.UserData.set(null);
-  }
-
   loginWithGoogle() {
     const provider = new GoogleAuthProvider();
     return signInWithPopup(this.auth, provider);

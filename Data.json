@@ -2,91 +2,24 @@
   "Users": [
     {
       "name": "Aly Ahmed",
-      "phone": "01228380204",
-      "rePassword": "Aly123",
-      "password": "Aly123",
-      "email": "Aly@gmail.com",
-      "IsSubscribe": true,
-      "SubscriptionEndDate": "2027-05-17T23:47:14.534Z",
-      "id": "2fAq3D8mC9k",
-      "WatchHistory": [],
-      "WatchLater": [],
-      "Favourites": []
-    },
-    {
-      "name": "Aly Ahmed",
-      "phone": "01501795004",
-      "rePassword": "Aly123",
-      "password": "Aly123",
-      "email": "Aly@gmail.com",
-      "IsSubscribe": false,
-      "SubscriptionEndDate": null,
-      "id": "d41OFQzPIjI",
-      "WatchHistory": [],
-      "WatchLater": [],
-      "Favourites": []
-    },
-    {
-      "name": "Aly Ahmed",
-      "phone": "01501795004",
-      "rePassword": "Aly123",
-      "password": "Aly123",
-      "email": "Aly@gmail.com",
-      "IsSubscribe": false,
-      "SubscriptionEndDate": null,
-      "id": "SM6FuBJT740",
-      "WatchHistory": [],
-      "WatchLater": [],
-      "Favourites": []
-    },
-    {
-      "name": "Aly Ahmed",
       "phone": "01501795004",
       "rePassword": "aaaa44",
       "password": "aaaa44",
       "email": "Aly@gmail.com",
       "IsSubscribe": false,
       "SubscriptionEndDate": null,
-      "id": "mSLSOcjsI5o",
-      "WatchHistory": [],
-      "WatchLater": [],
-      "Favourites": []
+      "id": "mSLSOcjsI5o"
     },
-    {
-      "name": "Mohammed",
-      "phone": "01501795004",
-      "rePassword": "Mohammed123",
-      "password": "Mohammed123",
-      "email": "Mohammed@gmail.com",
-      "IsSubscribe": false,
-      "SubscriptionEndDate": null,
-      "id": "5LNKo8GbxDU",
-      "WatchHistory": [],
-      "WatchLater": [],
-      "Favourites": []
-    },
+
     {
       "email": "ahmedfaragfekry@gmail.com",
       "id": "ltDIq7uvl6I",
       "IsSubscribe": false,
-      "SubscriptionEndDate": null,
-      "WatchHistory": [],
-      "WatchLater": [],
-      "Favourites": []
-    },
-    {
-      "WatchHistory": [],
-      "WatchLater": [],
-      "Favourites": [],
-      "IsSubscribe": true,
-      "SubscriptionEndDate": "2026-06-17T23:50:25.382Z",
-      "name": "Mohamed Ali Fadl",
-      "phone": "01112223334",
-      "rePassword": "MedoAli123",
-      "password": "MedoAli123",
-      "email": "mali@gmail.com",
-      "id": "p4n93vtesq"
+      "SubscriptionEndDate": null
     }
   ],
+  "WatchHistory": [],
+  "WatchLater": [],
+  "Favourites": [],
   "$schema": "./node_modules/json-server/schema.json"
 }
