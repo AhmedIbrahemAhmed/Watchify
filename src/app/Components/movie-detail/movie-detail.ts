@@ -10,6 +10,7 @@ import { VideoPlayer } from "../video-player/video-player";
 import { TmdbService } from '../../Core/Services/tmdb-service';
 import { Authentication } from '../../Core/Services/authentication';
 import { ChangeDetectorRef } from '@angular/core';
+import { UserService } from '../../Core/Services/user-service';
 
 @Component({
   selector: 'app-movie-detail',
@@ -24,6 +25,8 @@ export class MovieDetail {
   private router = inject(Router);
   private movieService = inject(TmdbService);
   private cdr = inject(ChangeDetectorRef);
+  userService = inject(UserService);
+
   selectedSeasonIndex = 0;
   selectedEpisodeIndex = 0;
   currentMovie: Movie | null = null;
@@ -195,7 +198,11 @@ export class MovieDetail {
       // Smooth scroll to the player
       setTimeout(() => {
         document.getElementById('player')?.scrollIntoView({ behavior: 'smooth' });
+        const type = this.route.snapshot.data['mediaType'] as 'movie' | 'tv';
+        this.userService.addMedia('history', this.currentMovie, type);
+
       }, 100);
+
     } else {
       // If not subscribed, redirect to pricing or show a modal
       //alert('Subscription Required! Redirecting to plans...');
