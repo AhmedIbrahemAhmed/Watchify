@@ -1,8 +1,8 @@
-@if (userService.Favourites().length > 0) {
+@if (userService.WatchHistory().length > 0) {
   <section class="container-fluid bg-dark-custom text-light py-5 px-4">
     <div class="container-fluid px-lg-5">
       <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="section-title">Favourites</h2>
+        <h2 class="section-title">Recently Watched</h2>
         <div class="d-flex gap-2">
           <button class="slider-btn slider-left" (click)="scrollLeft()">
             <i class="bi bi-chevron-left"></i>
@@ -15,10 +15,10 @@
       </div>
 
       <div class="slider-wrapper">
-        <div #scrolFavourites class="movies-slider d-flex gap-4 pb-3">
-          @for (item of userService.Favourites(); track item.id) {
+        <div #scrolRecentlyWatched class="movies-slider d-flex gap-4 pb-3">
+          @for (item of userService.WatchHistory(); track item.id) {
             <div style="width: 300px" class="flex-shrink-0">
-              <app-media-card [media]="item.data" [mediaType]="item.type" mode="favourite">
+              <app-media-card [media]="item.data" [mediaType]="item.type" mode="recentlyWatched">
               </app-media-card>
             </div>
           }

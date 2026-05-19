@@ -29,30 +29,55 @@ export class UserService {
         if (!user[key]) {
           user[key] = [];
         }
+        if (key === 'WatchHistory') {
+          // helper to strip base url
+          const stripUrl = (url: string) =>
+            url?.replace('https://image.tmdb.org/t/p/original', '/')
+              ?.replace('https://image.tmdb.org/t/p/w500', '/');
 
-        //  check duplicate
-        const exists = user[key].some(
-          (m: any) => m.id === media.id && m.type === type
-        );
+          // remove old entry if exists
+          user[key] = user[key].filter(
+            (m: any) => !(m.id === media.id && m.type === type)
+          );
 
-        if (exists) {
-          this.toaster.success("Already Added");
-          return;
+          user[key].push({
+            id: media.id,
+            type,
+            data: {
+              ...media,
+              backdrop_path: stripUrl(media.backdropUrl),
+              poster_path: stripUrl(media.posterUrl)
+            },
+            watchedAt: new Date().toISOString()
+          });
+
+          // sort latest first
+          user[key].sort(
+            (a: any, b: any) => new Date(b.watchedAt).getTime() - new Date(a.watchedAt).getTime());
+        } else {
+          //  check duplicate
+          const exists = user[key].some(
+            (m: any) => m.id === media.id && m.type === type
+          );
+
+          if (exists) {
+            return;
+          }
+
+          // push media
+          user[key].push({
+            id: media.id,
+            type,
+            watchedAt: new Date().toISOString(), //for recently watch
+            data: media
+          });
         }
-
-        // push media
-        user[key].push({
-          id: media.id,
-          type,
-          data: media
-        });
-
         //  update server
         this.http.patch(`${JsonBaseUrl}/Users/${userId}`, {
           [key]: user[key]
         }).subscribe(res => {
-          console.log('Added Successfully', res);
-          this.toaster.success("Added Successfully");
+          if (mode != 'history')
+            this.toaster.success("Added Successfully");
         });
 
       });
@@ -116,8 +141,8 @@ export class UserService {
       .subscribe(user => {
         this.watchLater.set(user.WatchLater);
         this.Favourites.set(user.Favourites);
-        this.WatchHistory.set(user.Favourites);
-        console.log(this.watchLater());
+        this.WatchHistory.set(user.WatchHistory);
+        //console.log(this.watchLater());
       });
   }
 
