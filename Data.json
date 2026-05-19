@@ -99,6 +99,95 @@
       "password": "123456",
       "email": "ahmedelnile44@gmail.com",
       "id": "bxwis4md1tm"
+    },
+    {
+      "WatchHistory": [],
+      "WatchLater": [
+        {
+          "id": 124364,
+          "type": "tv",
+          "data": {
+            "adult": false,
+            "backdrop_path": "/auyEi4Xho43HFvVQnd42LzqBdiV.jpg",
+            "id": 124364,
+            "name": "FROM",
+            "original_name": "FROM",
+            "overview": "Unravel the mystery of a nightmarish town in middle America that traps all those who enter. As the unwilling residents fight to keep a sense of normalcy and search for a way out, they must also survive the threats of the surrounding forest – including the terrifying creatures that come out when the sun goes down.",
+            "poster_path": "/pRtJagIxpfODzzb0T0NAvZSzErC.jpg",
+            "media_type": "tv",
+            "original_language": "en",
+            "genre_ids": [
+              9648,
+              18,
+              10765
+            ],
+            "popularity": 629.4514,
+            "first_air_date": "2022-02-20",
+            "softcore": false,
+            "vote_average": 8.371,
+            "vote_count": 3205,
+            "origin_country": [
+              "US"
+            ]
+          }
+        }
+      ],
+      "Favourites": [
+        {
+          "id": 1007757,
+          "type": "movie",
+          "data": {
+            "adult": false,
+            "backdrop_path": "/zMwhWailP1WY7sb6AoE6b8ugoy.jpg",
+            "genre_ids": [
+              16,
+              10751,
+              12,
+              14
+            ],
+            "id": 1007757,
+            "title": "Swapped",
+            "original_language": "en",
+            "original_title": "Swapped",
+            "overview": "A small woodland creature and a majestic bird, two natural sworn enemies of the Valley, magically trade places and set off on an adventure of a lifetime to switch back. Their journey soon uncovers a greater threat—one that could endanger not only their species, but the entire valley they call home.",
+            "popularity": 396.2282,
+            "poster_path": "/tHhxWxge06goXU6ZQH1hj7vK8Hd.jpg",
+            "release_date": "2026-05-01",
+            "softcore": false,
+            "video": false,
+            "vote_average": 8.992,
+            "vote_count": 1141
+          }
+        },
+        {
+          "id": 1339713,
+          "type": "movie",
+          "data": {
+            "adult": false,
+            "backdrop_path": "/rZfmzpixLKLR3Hg2u0WgC7XLFl8.jpg",
+            "id": 1339713,
+            "title": "Obsession",
+            "original_title": "Obsession",
+            "overview": "After breaking the mysterious \"One Wish Willow\" to win his crush's heart, a hopeless romantic finds himself getting exactly what he asked for but soon discovers that some desires come at a dark, sinister price.",
+            "poster_path": "/40I66L7QKguTFDPvcLcdiTbAD7I.jpg",
+            "media_type": "movie",
+            "original_language": "en",
+            "genre_ids": [
+              27
+            ],
+            "popularity": 125.9389,
+            "release_date": "2026-04-16",
+            "softcore": false,
+            "video": false,
+            "vote_average": 8.122,
+            "vote_count": 98
+          }
+        }
+      ],
+      "IsSubscribe": true,
+      "SubscriptionEndDate": "2026-06-18T18:41:41.612Z",
+      "email": "amnaabdelwahab77@gmail.com",
+      "id": "xL96aHlQRuhwOTDRsLjCLK3CTKf2"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

@@ -55,3 +55,5 @@ export interface Movie {
   seasons?: Season[];
   currentEpisodeIndex?: number;
 }
+
+export type CardMode = 'browse'| 'watchlist'| 'favourite'| 'recentlyWatched';
